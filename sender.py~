@@ -1,0 +1,12 @@
+import socket
+import json
+
+sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
+sock.setsockopt(socket.SOL_SOCKET, socket.SO_BROADCAST, 1)
+
+user_data = {"name": "ALICE", "age": 30}
+user_json = json.dumps(user_data)
+
+sock.sendto(user_json.encode('utf-8'),('255.255.255.255', 5000))
+
+print("Broadcast message sent!")
